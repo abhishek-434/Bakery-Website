@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Fast 2.2s max intro duration
-    setTimeout(dismissIntro, 2200);
+    setTimeout(dismissIntro, 1300);
   } else {
     document.body.classList.remove('overflow-hidden');
   }
