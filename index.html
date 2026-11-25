@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bakery.com — Sweet Moments Start Here</title>
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+  <meta name="description" content="Discover the perfect blend of taste and freshness with our handcrafted baked goods at Bakery.com." />
+
+  <!-- Google Fonts: Plus Jakarta Sans & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            espresso: '#3A1C0E',
+            'espresso-deep': '#2A1207',
+            bakery: '#EA6A12',
+            'bakery-hover': '#D15808',
+            cream: '#FAF3EB',
+            ink: '#2B140A',
+            muted: '#6B5B53',
+            divider: '#EFE6DD',
+          },
+          fontFamily: {
+            heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['Poppins', 'sans-serif'],
+          },
+          boxShadow: {
+            soft: '0 10px 30px -10px rgba(43, 20, 10, 0.08)',
+            card: '0 14px 35px -12px rgba(58, 28, 14, 0.12)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-white text-ink font-sans antialiased selection:bg-bakery selection:text-white overflow-hidden">
+
+  <!-- 0. Video Intro Preloader -->
+  <div id="intro-loader" class="fixed inset-0 z-[60] bg-espresso-deep/25 backdrop-blur-md flex flex-col items-center justify-center p-6 transition-opacity duration-400" role="status" aria-label="Loading Bakery.com">
+    <div class="relative flex flex-col items-center">
+      <div class="w-56 h-56 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-2xl border-4 border-white/70 bg-[#F4F3E8]">
+        <video
+          id="intro-video"
+          class="w-full h-full object-cover scale-110"
+          autoplay
+          muted
+          playsinline
+          preload="auto"
+        >
+          <source src="Beige%20and%20Brown%20Illustrative%20Dessert%20Logo.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <button
+        id="skip-intro-btn"
+        type="button"
+        class="mt-5 inline-flex items-center gap-2 bg-espresso/90 hover:bg-bakery text-white text-xs font-medium px-4 py-2 rounded-full shadow-lg transition-colors"
+      >
+        <span>Skip</span>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- 1. Top Utility Bar -->
+  <div class="bg-espresso text-white text-xs sm:text-[13px] py-2.5 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div class="flex flex-wrap items-center justify-center sm:justify-start gap-x-5 gap-y-1">
+        <a href="tel:+15551234567" class="inline-flex items-center gap-1.5 hover:text-bakery transition-colors">
+          <i data-lucide="phone" class="w-3.5 h-3.5 text-bakery"></i>
+          <span>+1 (555) 123-4567</span>
+        </a>
+        <a href="mailto:hello@bakery.com" class="inline-flex items-center gap-1.5 hover:text-bakery transition-colors">
+          <i data-lucide="mail" class="w-3.5 h-3.5 text-bakery"></i>
+          <span>hello@bakery.com</span>
+        </a>
+        <span class="inline-flex items-center gap-1.5 text-white/90">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-bakery"></i>
+          <span>123 Sweet Street, NY</span>
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a href="#contact" aria-label="Facebook" class="w-7 h-7 rounded-full border border-white/25 flex items-center justify-center text-white/90 hover:bg-bakery hover:border-bakery hover:text-white transition-all">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>
+        </a>
+        <a href="#contact" aria-label="Instagram" class="w-7 h-7 rounded-full border border-white/25 flex items-center justify-center text-white/90 hover:bg-bakery hover:border-bakery hover:text-white transition-all">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+        </a>
+        <a href="#contact" aria-label="YouTube" class="w-7 h-7 rounded-full border border-white/25 flex items-center justify-center text-white/90 hover:bg-bakery hover:border-bakery hover:text-white transition-all">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.93 4.78 12 4.78 12 4.78s-5.93 0-7.64.46A2.75 2.75 0 0 0 2.42 7.19 28.6 28.6 0 0 0 2 12a28.6 28.6 0 0 0 .42 4.81 2.75 2.75 0 0 0 1.94 1.95c1.71.46 7.64.46 7.64.46s5.93 0 7.64-.46a2.75 2.75 0 0 0 1.94-1.95A28.6 28.6 0 0 0 22 12a28.6 28.6 0 0 0-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
+        </a>
+        <a href="#contact" aria-label="LinkedIn" class="w-7 h-7 rounded-full border border-white/25 flex items-center justify-center text-white/90 hover:bg-bakery hover:border-bakery hover:text-white transition-all">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Main Navigation Header -->
+  <header id="main-header" class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm transition-shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <!-- Brand Logo -->
+      <a href="#home" class="flex items-center gap-2.5 group shrink-0">
+        <img src="assets/logo.jpg" alt="Bakery.com Logo" class="w-10 h-10 rounded-xl object-cover shadow-sm border border-divider group-hover:scale-105 transition-transform" />
+        <span class="font-heading font-extrabold text-xl sm:text-2xl tracking-tight text-espresso">
+          Bakery<span class="text-bakery">.com</span>
+        </span>
+      </a>
+
+      <!-- Center Navigation -->
+      <nav class="hidden lg:flex items-center gap-8" aria-label="Primary Navigation">
+        <a href="#home" class="nav-link active text-sm font-medium text-ink hover:text-bakery transition-colors py-2 relative">Home</a>
+        <a href="#about" class="nav-link text-sm font-medium text-ink hover:text-bakery transition-colors py-2 relative">About</a>
+        <a href="#menu" class="nav-link text-sm font-medium text-ink hover:text-bakery transition-colors py-2 relative">Menu</a>
+        <a href="#gallery" class="nav-link text-sm font-medium text-ink hover:text-bakery transition-colors py-2 relative">Gallery</a>
+        <a href="#blog" class="nav-link text-sm font-medium text-ink hover:text-bakery transition-colors py-2 relative">Blog</a>
+        <a href="#contact" class="nav-link text-sm font-medium text-ink hover:text-bakery transition-colors py-2 relative">Contact</a>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-3">
+        <button id="search-toggle-btn" type="button" aria-label="Search Bakery" class="w-10 h-10 rounded-full border border-divider text-ink hover:border-bakery hover:text-bakery flex items-center justify-center transition-colors">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </button>
+
+        <button id="cart-open-btn" type="button" class="relative inline-flex items-center gap-2 bg-bakery hover:bg-bakery-hover text-white font-medium text-sm px-5 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all">
+          <span>Order Now</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <span id="cart-badge" class="hidden ml-0.5 inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-[11px] font-bold bg-espresso text-white rounded-full">0</span>
+        </button>
+
+        <button id="mobile-menu-btn" type="button" aria-label="Toggle Menu" class="lg:hidden w-10 h-10 rounded-xl border border-divider flex items-center justify-center text-espresso hover:border-bakery hover:text-bakery transition-colors">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Expandable Search Bar -->
+    <div id="search-bar-panel" class="hidden border-t border-divider bg-cream/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <form id="search-form" class="flex items-center gap-3 max-w-2xl mx-auto">
+          <div class="relative flex-1">
+            <i data-lucide="search" class="w-4 h-4 text-muted absolute left-4 top-1/2 -translate-y-1/2"></i>
+            <input id="search-input" type="text" placeholder="Search croissants, cupcakes, tarts, recipes..." class="w-full pl-10 pr-4 py-2.5 rounded-full bg-white border border-divider text-sm text-ink placeholder:text-muted focus:outline-none focus:border-bakery" />
+          </div>
+          <button type="submit" class="bg-espresso hover:bg-bakery text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors">Search</button>
+          <button id="search-close-btn" type="button" aria-label="Close Search" class="w-9 h-9 rounded-full bg-white border border-divider flex items-center justify-center text-muted hover:text-ink">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </form>
+        <p id="search-feedback" class="hidden text-center text-xs text-muted mt-2"></p>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-divider bg-white">
+      <nav class="px-4 py-4 flex flex-col gap-1" aria-label="Mobile Navigation">
+        <a href="#home" class="mobile-nav-link px-4 py-2.5 rounded-xl text-sm font-medium text-bakery bg-cream">Home</a>
+        <a href="#about" class="mobile-nav-link px-4 py-2.5 rounded-xl text-sm font-medium text-ink hover:bg-cream">About</a>
+        <a href="#menu" class="mobile-nav-link px-4 py-2.5 rounded-xl text-sm font-medium text-ink hover:bg-cream">Menu</a>
+        <a href="#gallery" class="mobile-nav-link px-4 py-2.5 rounded-xl text-sm font-medium text-ink hover:bg-cream">Gallery</a>
+        <a href="#blog" class="mobile-nav-link px-4 py-2.5 rounded-xl text-sm font-medium text-ink hover:bg-cream">Blog</a>
+        <a href="#contact" class="mobile-nav-link px-4 py-2.5 rounded-xl text-sm font-medium text-ink hover:bg-cream">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 3. Hero Section -->
+    <section id="home" class="relative overflow-hidden bg-espresso-deep min-h-[600px] lg:min-h-[670px] flex items-center pb-24 pt-16">
+      <!-- Background Photo -->
+      <img
+        src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1800&q=85"
+        alt="Rich chocolate drip cake topped with fresh strawberries, blueberries, and mint"
+        class="absolute inset-0 w-full h-full object-cover object-center"
+      />
+      <!-- Left-to-right Espresso Gradient -->
+      <div class="hero-gradient absolute inset-0"></div>
+
+      <!-- Faint Bakery Doodle Overlay -->
+      <div class="hero-doodles absolute inset-0 pointer-events-none opacity-10" aria-hidden="true">
+        <svg class="absolute top-12 left-10 w-24 h-24 text-white" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M18 46L46 18M42 14L50 22M14 42L22 50" stroke-linecap="round"/>
+          <ellipse cx="32" cy="32" rx="18" ry="8" transform="rotate(-45 32 32)"/>
+        </svg>
+        <svg class="absolute bottom-28 left-1/3 w-28 h-28 text-white" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M32 10V54M32 18C26 18 22 14 22 10M32 18C38 18 42 14 42 10M32 28C26 28 22 24 22 20M32 28C38 28 42 24 42 20M32 38C26 38 22 34 22 30M32 38C38 38 42 34 42 30" stroke-linecap="round"/>
+        </svg>
+        <svg class="absolute top-20 right-1/3 w-20 h-20 text-white" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M16 48C22 42 28 26 28 16C34 16 48 22 48 36C38 36 22 42 16 48Z" stroke-linejoin="round"/>
+          <path d="M16 48L10 54" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- Hero Content -->
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
+        <div class="max-w-2xl hero-animate">
+          <div class="inline-flex items-center gap-3 text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase text-white/90 mb-5">
+            <span class="w-8 h-[2px] bg-bakery"></span>
+            <span>FRESHLY BAKED, ALWAYS DELICIOUS</span>
+            <span class="w-8 h-[2px] bg-bakery"></span>
+          </div>
+
+          <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-white mb-6">
+            Sweet Moments<br />
+            <span class="text-bakery">Start Here</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-white/85 leading-relaxed max-w-xl mb-8">
+            Discover the perfect blend of taste and freshness with our handcrafted baked goods.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 mb-9">
+            <a href="#menu" class="inline-flex items-center gap-2.5 bg-bakery hover:bg-bakery-hover text-white font-semibold text-sm sm:text-base px-7 py-3.5 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all">
+              <span>Order Now</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+
+            <button id="watch-video-btn" type="button" class="inline-flex items-center gap-3 bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/25 text-white font-medium text-sm sm:text-base pl-2.5 pr-6 py-2 rounded-full transition-all">
+              <span class="w-9 h-9 rounded-full bg-bakery flex items-center justify-center shadow-sm">
+                <i data-lucide="play" class="w-4 h-4 fill-white text-white ml-0.5"></i>
+              </span>
+              <span>Watch Video</span>
+            </button>
+          </div>
+
+          <!-- Hero Trust Stats Badge Row -->
+          <div class="inline-flex flex-wrap items-center gap-5 sm:gap-7 bg-espresso-deep/65 backdrop-blur-md border border-white/15 rounded-2xl px-5 py-3.5 shadow-lg">
+            <div class="flex items-center gap-2.5">
+              <span class="w-9 h-9 rounded-full bg-bakery/20 border border-bakery/40 text-bakery flex items-center justify-center shrink-0">
+                <i data-lucide="star" class="w-4 h-4 fill-bakery"></i>
+              </span>
+              <div>
+                <p class="font-heading font-bold text-sm sm:text-base text-white leading-tight">4.9 / 5.0</p>
+                <p class="text-[11px] sm:text-xs text-white/70">2,500+ Happy Reviews</p>
+              </div>
+            </div>
+
+            <div class="hidden sm:block w-px h-8 bg-white/15"></div>
+
+            <div class="flex items-center gap-2.5">
+              <span class="w-9 h-9 rounded-full bg-bakery/20 border border-bakery/40 text-bakery flex items-center justify-center shrink-0">
+                <i data-lucide="flame" class="w-4 h-4"></i>
+              </span>
+              <div>
+                <p class="font-heading font-bold text-sm sm:text-base text-white leading-tight">100% Fresh</p>
+                <p class="text-[11px] sm:text-xs text-white/70">Baked Every Morning</p>
+              </div>
+            </div>
+
+            <div class="hidden sm:block w-px h-8 bg-white/15"></div>
+
+            <div class="flex items-center gap-2.5">
+              <span class="w-9 h-9 rounded-full bg-bakery/20 border border-bakery/40 text-bakery flex items-center justify-center shrink-0">
+                <i data-lucide="clock" class="w-4 h-4"></i>
+              </span>
+              <div>
+                <p class="font-heading font-bold text-sm sm:text-base text-white leading-tight">30 Mins</p>
+                <p class="text-[11px] sm:text-xs text-white/70">Local Delivery</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Bakery Cards on Right -->
+        <div class="hidden lg:flex flex-col items-end gap-5 self-stretch justify-between py-4 pointer-events-auto">
+          <!-- Floating Promo Card -->
+          <div class="float-card-1 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-2xl border border-white/40 max-w-[240px]">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider bg-bakery/15 text-bakery px-2.5 py-0.5 rounded-full">
+                <i data-lucide="sparkles" class="w-3 h-3"></i>
+                Today's Special
+              </span>
+              <span class="text-xs font-extrabold text-espresso">20% OFF</span>
+            </div>
+            <p class="font-heading font-bold text-sm text-ink">Berry Chocolate Drip Cake</p>
+            <div class="flex items-center justify-between mt-2">
+              <span class="font-heading font-extrabold text-bakery text-base">$24.99</span>
+              <a href="#menu" class="text-xs font-semibold text-espresso hover:text-bakery transition-colors inline-flex items-center gap-1">
+                <span>Order</span>
+                <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Floating Freshness Pill -->
+          <div class="float-card-2 bg-espresso-deep/85 backdrop-blur-md text-white rounded-2xl px-4 py-3 shadow-xl border border-white/15 flex items-center gap-3">
+            <span class="relative flex h-3 w-3 shrink-0">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+            </span>
+            <div>
+              <p class="font-heading font-bold text-xs text-white">Fresh Out of the Oven</p>
+              <p class="text-[11px] text-white/70">Warm croissants baked 15m ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Asymmetric Curved Bottom Wave -->
+      <div class="hero-wave-container" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="w-full h-[70px] sm:h-[95px] block">
+          <path d="M0,45 C320,120 720,0 1440,75 L1440,120 L0,120 Z" fill="#EA6A12"/>
+          <path d="M0,68 C360,130 780,12 1440,88 L1440,120 L0,120 Z" fill="#FFFFFF"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 4. 4-Column Feature Highlights Strip -->
+    <section class="py-10 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-cream/55 rounded-2xl border border-divider/80 py-6 px-4 grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-divider">
+          <div class="flex flex-col items-center text-center gap-3 py-3 px-4">
+            <div class="w-12 h-12 rounded-full bg-bakery text-white flex items-center justify-center shrink-0 shadow-sm">
+              <i data-lucide="wheat" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h2 class="font-heading font-bold text-base text-ink">Fresh Ingredients</h2>
+              <p class="text-xs sm:text-sm text-muted">100% Natural</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center text-center gap-3 py-3 px-4">
+            <div class="w-12 h-12 rounded-full bg-bakery text-white flex items-center justify-center shrink-0 shadow-sm">
+              <i data-lucide="heart" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h2 class="font-heading font-bold text-base text-ink">Handcrafted</h2>
+              <p class="text-xs sm:text-sm text-muted">with Love</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center text-center gap-3 py-3 px-4">
+            <div class="w-12 h-12 rounded-full bg-bakery text-white flex items-center justify-center shrink-0 shadow-sm">
+              <i data-lucide="truck" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h2 class="font-heading font-bold text-base text-ink">Fast &amp; Reliable</h2>
+              <p class="text-xs sm:text-sm text-muted">Delivery</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col items-center text-center gap-3 py-3 px-4">
+            <div class="w-12 h-12 rounded-full bg-bakery text-white flex items-center justify-center shrink-0 shadow-sm">
+              <i data-lucide="smile" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h2 class="font-heading font-bold text-base text-ink">Customer</h2>
+              <p class="text-xs sm:text-sm text-muted">Satisfaction</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4b. Animated Bakery Marquee Ticker -->
+    <div class="marquee-wrapper overflow-hidden bg-bakery text-white py-3 border-y border-bakery-hover select-none" aria-label="Bakery Highlights">
+      <div class="marquee-track flex items-center gap-10 text-xs sm:text-sm font-semibold tracking-wider uppercase whitespace-nowrap">
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-white"></span>Freshly Baked Every Morning</span>
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-white"></span>100% Organic Butter &amp; Flour</span>
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-white"></span>Handcrafted Celebration Cakes</span>
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-white"></span>30-Minute Local Delivery</span>
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-white"></span>20% Off With Code SWEET20</span>
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-white"></span>Freshly Baked Every Morning</span>
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-white"></span>100% Organic Butter &amp; Flour</span>
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-white"></span>Handcrafted Celebration Cakes</span>
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-white"></span>30-Minute Local Delivery</span>
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-white"></span>20% Off With Code SWEET20</span>
+      </div>
+    </div>
+
+    <!-- 5. Our Popular Items -->
+    <section id="menu" class="py-14 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <div class="inline-flex items-center gap-3 text-xs sm:text-sm font-semibold tracking-wider uppercase text-bakery mb-3">
+            <span class="w-6 h-[2px] bg-bakery"></span>
+            <span>Our Popular Items</span>
+            <span class="w-6 h-[2px] bg-bakery"></span>
+          </div>
+          <h2 class="font-heading font-extrabold text-3xl sm:text-4xl tracking-tight text-ink mb-4">
+            Delicious Bakes for <span class="text-bakery">Every Mood</span>
+          </h2>
+          <p class="text-muted text-sm sm:text-base mb-7">
+            From classic favorites to unique creations, our bakery has something special for everyone.
+          </p>
+
+          <!-- Category Filter Pills -->
+          <div id="menu-filters" class="inline-flex flex-wrap items-center justify-center gap-2.5" role="tablist" aria-label="Menu Categories">
+            <button type="button" data-filter="all" class="menu-filter-btn active px-5 py-2 rounded-full text-xs sm:text-sm font-medium bg-bakery text-white shadow-sm transition-all">All Items</button>
+            <button type="button" data-filter="pastries" class="menu-filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium bg-cream text-ink hover:bg-bakery hover:text-white transition-all">Pastries</button>
+            <button type="button" data-filter="cupcakes" class="menu-filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium bg-cream text-ink hover:bg-bakery hover:text-white transition-all">Cupcakes &amp; Cookies</button>
+            <button type="button" data-filter="cakes" class="menu-filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium bg-cream text-ink hover:bg-bakery hover:text-white transition-all">Cakes &amp; Tarts</button>
+          </div>
+        </div>
+
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+          <!-- Product 1 -->
+          <article data-category="pastries" class="product-card bg-white rounded-2xl p-4 pb-5 shadow-soft border border-divider/60 hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col text-center">
+            <div class="aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-cream">
+              <img
+                src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80"
+                alt="Golden flaky Butter Croissant"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <h3 class="font-heading font-bold text-lg text-ink mb-1">Butter Croissant</h3>
+            <span class="font-heading font-bold text-base text-bakery mb-4">$4.99</span>
+            <button
+              type="button"
+              data-add-cart
+              data-id="butter-croissant"
+              data-name="Butter Croissant"
+              data-price="4.99"
+              data-image="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=400&q=80"
+              class="mt-auto mx-auto w-4/5 inline-flex items-center justify-center gap-2 bg-bakery hover:bg-bakery-hover text-white font-medium text-xs sm:text-sm py-2.5 px-5 rounded-full transition-colors"
+            >
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+              <span>Add to Cart</span>
+            </button>
+          </article>
+
+          <!-- Product 2 -->
+          <article data-category="cupcakes" class="product-card bg-white rounded-2xl p-4 pb-5 shadow-soft border border-divider/60 hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col text-center">
+            <div class="aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-cream">
+              <img
+                src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=800&q=80"
+                alt="Rich Chocolate Cupcake with buttercream frosting"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <h3 class="font-heading font-bold text-lg text-ink mb-1">Chocolate Cupcake</h3>
+            <span class="font-heading font-bold text-base text-bakery mb-4">$3.99</span>
+            <button
+              type="button"
+              data-add-cart
+              data-id="chocolate-cupcake"
+              data-name="Chocolate Cupcake"
+              data-price="3.99"
+              data-image="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=400&q=80"
+              class="mt-auto mx-auto w-4/5 inline-flex items-center justify-center gap-2 bg-bakery hover:bg-bakery-hover text-white font-medium text-xs sm:text-sm py-2.5 px-5 rounded-full transition-colors"
+            >
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+              <span>Add to Cart</span>
+            </button>
+          </article>
+
+          <!-- Product 3 -->
+          <article data-category="cakes" class="product-card bg-white rounded-2xl p-4 pb-5 shadow-soft border border-divider/60 hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col text-center">
+            <div class="aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-cream">
+              <img
+                src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=800&q=80"
+                alt="Fresh Fruit Tart with berries and custard"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <h3 class="font-heading font-bold text-lg text-ink mb-1">Fruit Tart</h3>
+            <span class="font-heading font-bold text-base text-bakery mb-4">$5.99</span>
+            <button
+              type="button"
+              data-add-cart
+              data-id="fruit-tart"
+              data-name="Fruit Tart"
+              data-price="5.99"
+              data-image="https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=400&q=80"
+              class="mt-auto mx-auto w-4/5 inline-flex items-center justify-center gap-2 bg-bakery hover:bg-bakery-hover text-white font-medium text-xs sm:text-sm py-2.5 px-5 rounded-full transition-colors"
+            >
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+              <span>Add to Cart</span>
+            </button>
+          </article>
+
+          <!-- Product 4 -->
+          <article data-category="cakes" class="product-card bg-white rounded-2xl p-4 pb-5 shadow-soft border border-divider/60 hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col text-center">
+            <div class="aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-cream">
+              <img
+                src="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?auto=format&fit=crop&w=800&q=80"
+                alt="Classic Red Velvet Cake slice with cream cheese frosting"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <h3 class="font-heading font-bold text-lg text-ink mb-1">Red Velvet Cake</h3>
+            <span class="font-heading font-bold text-base text-bakery mb-4">$5.99</span>
+            <button
+              type="button"
+              data-add-cart
+              data-id="red-velvet-cake"
+              data-name="Red Velvet Cake"
+              data-price="5.99"
+              data-image="https://images.unsplash.com/photo-1586788680434-30d324b2d46f?auto=format&fit=crop&w=400&q=80"
+              class="mt-auto mx-auto w-4/5 inline-flex items-center justify-center gap-2 bg-bakery hover:bg-bakery-hover text-white font-medium text-xs sm:text-sm py-2.5 px-5 rounded-full transition-colors"
+            >
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+              <span>Add to Cart</span>
+            </button>
+          </article>
+
+          <!-- Product 5 -->
+          <article data-category="pastries" class="product-card bg-white rounded-2xl p-4 pb-5 shadow-soft border border-divider/60 hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col text-center">
+            <div class="aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-cream">
+              <img
+                src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=800&q=80"
+                alt="Warm glazed Cinnamon Swirl Roll"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <h3 class="font-heading font-bold text-lg text-ink mb-1">Cinnamon Swirl Roll</h3>
+            <span class="font-heading font-bold text-base text-bakery mb-4">$4.49</span>
+            <button
+              type="button"
+              data-add-cart
+              data-id="cinnamon-roll"
+              data-name="Cinnamon Swirl Roll"
+              data-price="4.49"
+              data-image="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=400&q=80"
+              class="mt-auto mx-auto w-4/5 inline-flex items-center justify-center gap-2 bg-bakery hover:bg-bakery-hover text-white font-medium text-xs sm:text-sm py-2.5 px-5 rounded-full transition-colors"
+            >
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+              <span>Add to Cart</span>
+            </button>
+          </article>
+
+          <!-- Product 6 -->
+          <article data-category="cupcakes" class="product-card bg-white rounded-2xl p-4 pb-5 shadow-soft border border-divider/60 hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col text-center">
+            <div class="aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-cream">
+              <img
+                src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80"
+                alt="Freshly baked Chocolate Chip Cookies"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <h3 class="font-heading font-bold text-lg text-ink mb-1">Choco Chip Cookies</h3>
+            <span class="font-heading font-bold text-base text-bakery mb-4">$3.49</span>
+            <button
+              type="button"
+              data-add-cart
+              data-id="choco-chip-cookies"
+              data-name="Choco Chip Cookies"
+              data-price="3.49"
+              data-image="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=400&q=80"
+              class="mt-auto mx-auto w-4/5 inline-flex items-center justify-center gap-2 bg-bakery hover:bg-bakery-hover text-white font-medium text-xs sm:text-sm py-2.5 px-5 rounded-full transition-colors"
+            >
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+              <span>Add to Cart</span>
+            </button>
+          </article>
+
+          <!-- Product 7 -->
+          <article data-category="pastries" class="product-card bg-white rounded-2xl p-4 pb-5 shadow-soft border border-divider/60 hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col text-center">
+            <div class="aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-cream">
+              <img
+                src="https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=800&q=80"
+                alt="Pastel French Macarons Gift Box"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <h3 class="font-heading font-bold text-lg text-ink mb-1">French Macaron Box</h3>
+            <span class="font-heading font-bold text-base text-bakery mb-4">$8.99</span>
+            <button
+              type="button"
+              data-add-cart
+              data-id="macaron-box"
+              data-name="French Macaron Box"
+              data-price="8.99"
+              data-image="https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=400&q=80"
+              class="mt-auto mx-auto w-4/5 inline-flex items-center justify-center gap-2 bg-bakery hover:bg-bakery-hover text-white font-medium text-xs sm:text-sm py-2.5 px-5 rounded-full transition-colors"
+            >
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+              <span>Add to Cart</span>
+            </button>
+          </article>
+
+          <!-- Product 8 -->
+          <article data-category="cakes" class="product-card bg-white rounded-2xl p-4 pb-5 shadow-soft border border-divider/60 hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col text-center">
+            <div class="aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-cream">
+              <img
+                src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=800&q=80"
+                alt="Creamy Berry Celebration Cake"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <h3 class="font-heading font-bold text-lg text-ink mb-1">Berry Cream Cake</h3>
+            <span class="font-heading font-bold text-base text-bakery mb-4">$6.49</span>
+            <button
+              type="button"
+              data-add-cart
+              data-id="berry-cream-cake"
+              data-name="Berry Cream Cake"
+              data-price="6.49"
+              data-image="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=400&q=80"
+              class="mt-auto mx-auto w-4/5 inline-flex items-center justify-center gap-2 bg-bakery hover:bg-bakery-hover text-white font-medium text-xs sm:text-sm py-2.5 px-5 rounded-full transition-colors"
+            >
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+              <span>Add to Cart</span>
+            </button>
+          </article>
+        </div>
+
+        <div class="text-center mt-10">
+          <button id="custom-order-open-btn" type="button" class="inline-flex items-center gap-2.5 bg-espresso hover:bg-bakery text-white font-medium text-sm px-7 py-3.5 rounded-full transition-colors shadow-sm">
+            <i data-lucide="sparkles" class="w-4 h-4 text-bakery"></i>
+            <span>Request Custom Cake</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. About Bakery.com -->
+    <section id="about" class="py-10 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-cream rounded-3xl overflow-hidden shadow-soft">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <!-- Left Image with Curved Orange Accent -->
+            <div class="lg:col-span-5 relative h-full">
+              <div class="about-image-wrap relative aspect-[4/3] lg:aspect-auto lg:h-[380px] overflow-hidden rounded-2xl lg:rounded-none lg:rounded-r-[160px] border-r-8 border-bakery">
+                <img
+                  src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80"
+                  alt="Baker's hands dusting flour onto freshly baked pastries"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            <!-- Right Copy -->
+            <div class="lg:col-span-7 p-6 sm:p-10 lg:py-12 lg:pr-12 lg:pl-2">
+              <span class="inline-block text-sm font-semibold text-ink tracking-wide mb-2">About <span class="text-bakery">Bakery.com</span></span>
+              <div class="relative inline-block">
+                <h2 class="font-heading font-extrabold text-3xl sm:text-4xl tracking-tight text-ink leading-tight mb-5 pr-6">
+                  Baked with Passion, Served with Care
+                </h2>
+                <!-- Hand-drawn accent lines -->
+                <svg class="w-7 h-7 text-bakery absolute -top-2 -right-2" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                  <path d="M6 12L12 4"/>
+                  <path d="M14 16L24 10"/>
+                  <path d="M18 24L27 22"/>
+                </svg>
+              </div>
+              <p class="text-muted text-base leading-relaxed mb-8 max-w-xl">
+                At Bakery.com, we believe every bite should bring happiness. Our bakers use the finest ingredients to create delicious treats for your special moments.
+              </p>
+              <a href="#menu" class="inline-flex items-center gap-2.5 bg-espresso hover:bg-bakery text-white font-medium text-sm px-7 py-3.5 rounded-full transition-colors">
+                <span>Learn More</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6b. Daily Baking Schedule & Special Offer Strip -->
+    <section class="py-8 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-espresso-deep text-white rounded-3xl p-6 sm:p-8 shadow-card flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div class="text-center lg:text-left">
+            <span class="inline-block text-xs font-semibold uppercase tracking-widest text-bakery mb-1">Daily Oven Schedule</span>
+            <h2 class="font-heading font-extrabold text-xl sm:text-2xl text-white">Fresh Batches All Day Long</h2>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 w-full lg:w-auto">
+            <div class="bg-white/10 border border-white/10 rounded-2xl px-4 py-3 text-center">
+              <p class="text-xs font-bold text-bakery">7:00 AM</p>
+              <p class="text-xs sm:text-sm font-medium text-white">Croissants</p>
+            </div>
+            <div class="bg-white/10 border border-white/10 rounded-2xl px-4 py-3 text-center">
+              <p class="text-xs font-bold text-bakery">10:00 AM</p>
+              <p class="text-xs sm:text-sm font-medium text-white">Cupcakes</p>
+            </div>
+            <div class="bg-white/10 border border-white/10 rounded-2xl px-4 py-3 text-center">
+              <p class="text-xs font-bold text-bakery">1:00 PM</p>
+              <p class="text-xs sm:text-sm font-medium text-white">Fruit Tarts</p>
+            </div>
+            <div class="bg-white/10 border border-white/10 rounded-2xl px-4 py-3 text-center">
+              <p class="text-xs font-bold text-bakery">4:00 PM</p>
+              <p class="text-xs sm:text-sm font-medium text-white">Layer Cakes</p>
+            </div>
+          </div>
+
+          <a href="#menu" class="inline-flex items-center gap-2 bg-bakery hover:bg-bakery-hover text-white font-semibold text-xs sm:text-sm px-5 py-3 rounded-full transition-colors shrink-0">
+            <span>Use Code: SWEET20</span>
+            <i data-lucide="tag" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Customer Testimonials -->
+    <section class="py-14 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <div class="inline-flex items-center gap-3 text-xs sm:text-sm font-semibold tracking-wider uppercase text-bakery mb-3">
+            <span class="w-6 h-[2px] bg-bakery"></span>
+            <span>What Our Customers Say</span>
+            <span class="w-6 h-[2px] bg-bakery"></span>
+          </div>
+          <h2 class="font-heading font-extrabold text-3xl sm:text-4xl tracking-tight text-ink">
+            Trusted by Thousands of <span class="text-bakery">Happy Customers</span>
+          </h2>
+        </div>
+
+        <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-7 transition-opacity duration-300">
+          <!-- Populated dynamically / initial SSR cards -->
+        </div>
+
+        <!-- Pagination Dots -->
+        <div id="testimonial-dots" class="flex items-center justify-center gap-2.5 mt-10" role="tablist" aria-label="Testimonial slides">
+          <button type="button" data-slide="0" aria-label="Show testimonials set 1" class="testimonial-dot active w-8 h-2.5 rounded-full bg-bakery transition-all"></button>
+          <button type="button" data-slide="1" aria-label="Show testimonials set 2" class="testimonial-dot w-2.5 h-2.5 rounded-full bg-divider hover:bg-bakery/50 transition-all"></button>
+          <button type="button" data-slide="2" aria-label="Show testimonials set 3" class="testimonial-dot w-2.5 h-2.5 rounded-full bg-divider hover:bg-bakery/50 transition-all"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Our Bakery Gallery -->
+    <section id="gallery" class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <div class="inline-flex items-center gap-3 text-xs sm:text-sm font-semibold tracking-wider uppercase text-bakery mb-3">
+            <span class="w-6 h-[2px] bg-bakery"></span>
+            <span>Our Bakery Gallery</span>
+            <span class="w-6 h-[2px] bg-bakery"></span>
+          </div>
+          <h2 class="font-heading font-extrabold text-3xl sm:text-4xl tracking-tight text-ink mb-3">
+            A Taste of Our <span class="text-bakery">Creations</span>
+          </h2>
+          <p class="text-muted text-sm sm:text-base">
+            Explore our delicious bakes, crafted with love.
+          </p>
+        </div>
+
+        <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <button type="button" data-lightbox data-src="https://images.unsplash.com/photo-1587668178277-295251f900ce?auto=format&fit=crop&w=1200&q=85" data-caption="Chocolate Frosted Cupcakes" class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-cream shadow-soft text-left">
+            <img src="https://images.unsplash.com/photo-1587668178277-295251f900ce?auto=format&fit=crop&w=800&q=80" alt="Chocolate frosted cupcakes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-espresso-deep/0 group-hover:bg-espresso-deep/35 transition-colors flex items-center justify-center">
+              <span class="w-11 h-11 rounded-full bg-white/90 text-espresso flex items-center justify-center opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all">
+                <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              </span>
+            </div>
+          </button>
+
+          <button type="button" data-lightbox data-src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?auto=format&fit=crop&w=1200&q=85" data-caption="Golden Flaky Croissants" class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-cream shadow-soft text-left">
+            <img src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?auto=format&fit=crop&w=800&q=80" alt="Golden flaky croissants" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-espresso-deep/0 group-hover:bg-espresso-deep/35 transition-colors flex items-center justify-center">
+              <span class="w-11 h-11 rounded-full bg-white/90 text-espresso flex items-center justify-center opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all">
+                <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              </span>
+            </div>
+          </button>
+
+          <button type="button" data-lightbox data-src="https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=1200&q=85" data-caption="Pastel French Macarons" class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-cream shadow-soft text-left">
+            <img src="https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=800&q=80" alt="Pastel French macarons" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-espresso-deep/0 group-hover:bg-espresso-deep/35 transition-colors flex items-center justify-center">
+              <span class="w-11 h-11 rounded-full bg-white/90 text-espresso flex items-center justify-center opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all">
+                <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              </span>
+            </div>
+          </button>
+
+          <button type="button" data-lightbox data-src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1200&q=85" data-caption="Warm Chocolate Chip Cookies" class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-cream shadow-soft text-left">
+            <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80" alt="Warm chocolate chip cookies" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-espresso-deep/0 group-hover:bg-espresso-deep/35 transition-colors flex items-center justify-center">
+              <span class="w-11 h-11 rounded-full bg-white/90 text-espresso flex items-center justify-center opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all">
+                <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              </span>
+            </div>
+          </button>
+
+          <button type="button" data-lightbox data-src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1200&q=85" data-caption="Berry-Topped Mini Tarts" class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-cream shadow-soft text-left">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=800&q=80" alt="Berry-topped mini cheesecakes and tarts" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-espresso-deep/0 group-hover:bg-espresso-deep/35 transition-colors flex items-center justify-center">
+              <span class="w-11 h-11 rounded-full bg-white/90 text-espresso flex items-center justify-center opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all">
+                <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              </span>
+            </div>
+          </button>
+
+          <button type="button" data-lightbox data-src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1200&q=85" data-caption="Assorted Glazed & Sprinkled Donuts" class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-cream shadow-soft text-left">
+            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80" alt="Assorted glazed and sprinkled donuts" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-espresso-deep/0 group-hover:bg-espresso-deep/35 transition-colors flex items-center justify-center">
+              <span class="w-11 h-11 rounded-full bg-white/90 text-espresso flex items-center justify-center opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all">
+                <i data-lucide="zoom-in" class="w-5 h-5"></i>
+              </span>
+            </div>
+          </button>
+        </div>
+
+        <div class="text-center mt-10">
+          <button id="view-more-gallery-btn" type="button" class="inline-flex items-center gap-2.5 bg-espresso hover:bg-bakery text-white font-medium text-sm px-7 py-3.5 rounded-full transition-colors">
+            <span>View More Gallery</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Why Choose Bakery.com? Banner -->
+    <section class="py-10 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative overflow-hidden bg-espresso rounded-3xl px-6 py-10 sm:px-12 sm:py-14 shadow-card">
+          <!-- Subtle White Line-Art Cupcake & Heart Doodle on Far Right -->
+          <svg class="hidden md:block absolute -right-4 top-1/2 -translate-y-1/2 w-56 h-56 text-white/10 pointer-events-none" viewBox="0 0 160 160" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M115 30C115 24 123 20 127 26C131 20 139 24 139 30C139 38 127 46 127 46C127 46 115 38 115 30Z"/>
+            <path d="M50 75C50 56 64 44 80 44C96 44 110 56 110 75"/>
+            <path d="M44 75H116C119 75 122 78 122 81C122 84 119 87 116 87H44C41 87 38 84 38 81C38 78 41 75 44 75Z"/>
+            <path d="M48 87L56 130C57 134 61 137 65 137H95C99 137 103 134 104 130L112 87"/>
+            <path d="M68 95L71 128M80 95V128M92 95L89 128"/>
+            <circle cx="80" cy="36" r="7"/>
+          </svg>
+
+          <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-6">
+              <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white tracking-tight mb-4">
+                Why Choose<br />Bakery.com?
+              </h2>
+              <p class="text-cream/80 text-base leading-relaxed mb-7 max-w-md">
+                We bring you the perfect combination of quality, taste, and happiness.
+              </p>
+              <a href="#menu" class="inline-flex items-center gap-2.5 bg-bakery hover:bg-bakery-hover text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors shadow-md">
+                <span>Order Now</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div class="lg:col-span-6 flex flex-col gap-4">
+              <div class="flex items-center gap-3.5">
+                <span class="w-7 h-7 rounded-full bg-bakery text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="check" class="w-4 h-4"></i>
+                </span>
+                <span class="text-white font-medium text-base">Premium Quality Ingredients</span>
+              </div>
+
+              <div class="flex items-center gap-3.5">
+                <span class="w-7 h-7 rounded-full bg-bakery text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="check" class="w-4 h-4"></i>
+                </span>
+                <span class="text-white font-medium text-base">Freshly Baked Daily</span>
+              </div>
+
+              <div class="flex items-center gap-3.5">
+                <span class="w-7 h-7 rounded-full bg-bakery text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="check" class="w-4 h-4"></i>
+                </span>
+                <span class="text-white font-medium text-base">Affordable Prices</span>
+              </div>
+
+              <div class="flex items-center gap-3.5">
+                <span class="w-7 h-7 rounded-full bg-bakery text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="check" class="w-4 h-4"></i>
+                </span>
+                <span class="text-white font-medium text-base">Fast Delivery</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Latest from Our Blog -->
+    <section id="blog" class="py-14 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <div class="inline-flex items-center gap-3 text-xs sm:text-sm font-semibold tracking-wider uppercase text-bakery mb-3">
+            <span class="w-6 h-[2px] bg-bakery"></span>
+            <span>Latest from Our Blog</span>
+            <span class="w-6 h-[2px] bg-bakery"></span>
+          </div>
+          <h2 class="font-heading font-extrabold text-3xl sm:text-4xl tracking-tight text-ink mb-3">
+            Tips, Recipes &amp; <span class="text-bakery">More</span>
+          </h2>
+          <p class="text-muted text-sm sm:text-base">
+            Get inspired with our latest articles and baking tips.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+          <!-- Blog 1 -->
+          <article class="bg-white rounded-2xl p-4 shadow-soft border border-divider/60 hover:shadow-card transition-all flex flex-col">
+            <div class="aspect-[16/10] rounded-xl overflow-hidden mb-5 bg-cream">
+              <img
+                src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80"
+                alt="Flour, eggs, and baking ingredients flatlay"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div class="px-1 flex flex-col flex-1">
+              <div class="inline-flex items-center gap-2 text-xs font-medium text-muted mb-2.5">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-bakery"></i>
+                <span>Oct 25, 2024</span>
+              </div>
+              <h3 class="font-heading font-bold text-lg text-ink mb-4 leading-snug">
+                5 Baking Tips for Perfect Results
+              </h3>
+              <button type="button" data-blog-id="baking-tips" class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-bakery hover:text-espresso transition-colors w-fit">
+                <span>Read More</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- Blog 2 -->
+          <article class="bg-white rounded-2xl p-4 shadow-soft border border-divider/60 hover:shadow-card transition-all flex flex-col">
+            <div class="aspect-[16/10] rounded-xl overflow-hidden mb-5 bg-cream">
+              <img
+                src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=800&q=80"
+                alt="Piping frosting onto a layer cake"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div class="px-1 flex flex-col flex-1">
+              <div class="inline-flex items-center gap-2 text-xs font-medium text-muted mb-2.5">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-bakery"></i>
+                <span>Oct 20, 2024</span>
+              </div>
+              <h3 class="font-heading font-bold text-lg text-ink mb-4 leading-snug">
+                How to Decorate a Beautiful Cake
+              </h3>
+              <button type="button" data-blog-id="cake-decorating" class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-bakery hover:text-espresso transition-colors w-fit">
+                <span>Read More</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- Blog 3 -->
+          <article class="bg-white rounded-2xl p-4 shadow-soft border border-divider/60 hover:shadow-card transition-all flex flex-col">
+            <div class="aspect-[16/10] rounded-xl overflow-hidden mb-5 bg-cream">
+              <img
+                src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80"
+                alt="Freshly baked chocolate chip cookies"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div class="px-1 flex flex-col flex-1">
+              <div class="inline-flex items-center gap-2 text-xs font-medium text-muted mb-2.5">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-bakery"></i>
+                <span>Oct 15, 2024</span>
+              </div>
+              <h3 class="font-heading font-bold text-lg text-ink mb-4 leading-snug">
+                Easy Cookie Recipe at Home
+              </h3>
+              <button type="button" data-blog-id="cookie-recipe" class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-bakery hover:text-espresso transition-colors w-fit">
+                <span>Read More</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Newsletter Subscription Banner -->
+    <section class="pb-20 pt-4 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative overflow-hidden bg-bakery rounded-3xl px-6 py-8 sm:px-10 sm:py-10 shadow-card">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <!-- Left & Center: Header + Form -->
+            <div class="lg:col-span-8 space-y-5">
+              <div class="flex items-center gap-4 text-white">
+                <div class="w-12 h-12 rounded-2xl border-2 border-white/40 flex items-center justify-center shrink-0">
+                  <i data-lucide="mail" class="w-6 h-6 text-white"></i>
+                </div>
+                <div>
+                  <h3 class="font-heading font-bold text-xl sm:text-2xl leading-tight mb-0.5">
+                    Subscribe to Our Newsletter
+                  </h3>
+                  <p class="text-white/90 text-sm">
+                    Get the latest recipes, offers and more!
+                  </p>
+                </div>
+              </div>
+
+              <div class="max-w-xl">
+                <form id="newsletter-form" novalidate class="bg-white rounded-full p-1.5 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shadow-sm">
+                  <input
+                    id="newsletter-email"
+                    type="email"
+                    required
+                    placeholder="Your Email Address"
+                    class="flex-1 bg-transparent px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none"
+                  />
+                  <button type="submit" class="inline-flex items-center justify-center gap-2 bg-espresso hover:bg-espresso-deep text-white font-medium text-sm px-6 py-3 rounded-full transition-colors shrink-0">
+                    <span>Subscribe</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </button>
+                </form>
+                <p id="newsletter-message" class="hidden text-xs font-medium mt-2 px-3"></p>
+              </div>
+            </div>
+
+            <!-- Right Cupcake Studio Image -->
+            <div class="lg:col-span-4 flex justify-center lg:justify-end">
+              <div class="relative">
+                <svg class="w-7 h-7 text-white/85 absolute -top-3 -left-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M12 2v4M4 6l3 3M20 6l-3 3"/>
+                </svg>
+                <img
+                  src="https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?auto=format&fit=crop&w=400&q=80"
+                  alt="Vanilla-frosted cupcake with rainbow sprinkles"
+                  class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl object-cover border-4 border-white/30 shadow-md"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 12. Footer -->
+  <footer id="contact" class="relative overflow-hidden bg-espresso text-white pt-16 pb-10">
+    <!-- Subtle bottom orange wave accent -->
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" class="absolute bottom-0 left-0 right-0 w-full h-10 pointer-events-none" aria-hidden="true">
+      <path d="M0,18 C340,68 780,0 1440,42 L1440,70 L0,70 Z" fill="#EA6A12"/>
+    </svg>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-12">
+        <!-- Col 1: Brand -->
+        <div>
+          <a href="#home" class="inline-flex items-center gap-3 mb-4">
+            <img src="assets/logo.jpg" alt="Bakery.com Logo" class="w-11 h-11 rounded-xl object-cover bg-white p-0.5 shadow-sm" />
+            <span class="font-heading font-extrabold text-2xl tracking-tight text-white">
+              Bakery<span class="text-bakery">.com</span>
+            </span>
+          </a>
+          <p class="text-white/75 text-sm leading-relaxed mb-6">
+            Sweetness in every bite, happiness in every moment.
+          </p>
+          <div class="flex items-center gap-2.5">
+            <a href="#home" aria-label="Facebook" class="w-9 h-9 rounded-full border border-white/25 flex items-center justify-center text-white/90 hover:bg-bakery hover:border-bakery hover:text-white transition-all">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14c-.326-.043-1.557-.14-2.857-.14C11.928 2 10 3.657 10 6.7v2.8H7v4h3V22h4v-8.5z"/></svg>
+            </a>
+            <a href="#home" aria-label="Instagram" class="w-9 h-9 rounded-full border border-white/25 flex items-center justify-center text-white/90 hover:bg-bakery hover:border-bakery hover:text-white transition-all">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+            </a>
+            <a href="#home" aria-label="YouTube" class="w-9 h-9 rounded-full border border-white/25 flex items-center justify-center text-white/90 hover:bg-bakery hover:border-bakery hover:text-white transition-all">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.93 4.78 12 4.78 12 4.78s-5.93 0-7.64.46A2.75 2.75 0 0 0 2.42 7.19 28.6 28.6 0 0 0 2 12a28.6 28.6 0 0 0 .42 4.81 2.75 2.75 0 0 0 1.94 1.95c1.71.46 7.64.46 7.64.46s5.93 0 7.64-.46a2.75 2.75 0 0 0 1.94-1.95A28.6 28.6 0 0 0 22 12a28.6 28.6 0 0 0-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
+            </a>
+            <a href="#home" aria-label="LinkedIn" class="w-9 h-9 rounded-full border border-white/25 flex items-center justify-center text-white/90 hover:bg-bakery hover:border-bakery hover:text-white transition-all">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/></svg>
+            </a>
+            <a href="#home" aria-label="Pinterest" class="w-9 h-9 rounded-full border border-white/25 flex items-center justify-center text-white/90 hover:bg-bakery hover:border-bakery hover:text-white transition-all">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.18-5.01 1.18-5.01s-.3-.6-.3-1.49c0-1.4.81-2.44 1.82-2.44.86 0 1.27.64 1.27 1.41 0 .86-.55 2.15-.83 3.34-.24 1 .5 1.81 1.48 1.81 1.78 0 3.14-1.88 3.14-4.59 0-2.4-1.72-4.08-4.18-4.08-2.85 0-4.52 2.14-4.52 4.35 0 .86.33 1.78.75 2.28.08.1.09.19.07.29-.08.31-.25 1-.28 1.14-.04.18-.15.22-.34.13-1.25-.58-2.03-2.41-2.03-3.88 0-3.16 2.3-6.06 6.62-6.06 3.48 0 6.18 2.48 6.18 5.79 0 3.45-2.18 6.23-5.2 6.23-1.01 0-1.97-.53-2.3-1.15l-.62 2.38c-.23.87-.84 1.97-1.25 2.63.94.29 1.94.45 2.98.45 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div>
+          <h4 class="font-heading font-bold text-lg text-white mb-5">Quick Links</h4>
+          <ul class="space-y-3 text-sm text-white/75">
+            <li><a href="#home" class="hover:text-bakery transition-colors">Home</a></li>
+            <li><a href="#about" class="hover:text-bakery transition-colors">About</a></li>
+            <li><a href="#menu" class="hover:text-bakery transition-colors">Menu</a></li>
+            <li><a href="#blog" class="hover:text-bakery transition-colors">Blog</a></li>
+            <li><a href="#contact" class="hover:text-bakery transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Our Services -->
+        <div>
+          <h4 class="font-heading font-bold text-lg text-white mb-5">Our Services</h4>
+          <ul class="space-y-3 text-sm text-white/75">
+            <li><a href="#menu" class="hover:text-bakery transition-colors">Custom Cakes</a></li>
+            <li><a href="#menu" class="hover:text-bakery transition-colors">Party Treats</a></li>
+            <li><a href="#menu" class="hover:text-bakery transition-colors">Desserts</a></li>
+            <li><a href="#menu" class="hover:text-bakery transition-colors">Gift Boxes</a></li>
+            <li><a href="#menu" class="hover:text-bakery transition-colors">Delivery</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact Us -->
+        <div>
+          <h4 class="font-heading font-bold text-lg text-white mb-5">Contact Us</h4>
+          <ul class="space-y-3.5 text-sm text-white/75">
+            <li class="flex items-start gap-3">
+              <i data-lucide="phone" class="w-4 h-4 text-bakery mt-0.5 shrink-0"></i>
+              <a href="tel:+15551234567" class="hover:text-bakery transition-colors">+1 (555) 123-4567</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <i data-lucide="mail" class="w-4 h-4 text-bakery mt-0.5 shrink-0"></i>
+              <a href="mailto:hello@bakery.com" class="hover:text-bakery transition-colors">hello@bakery.com</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <i data-lucide="map-pin" class="w-4 h-4 text-bakery mt-0.5 shrink-0"></i>
+              <span>123 Sweet Street, New York, NY</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright Bar -->
+      <div class="pt-7 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-white/65">
+        <p>&copy; 2024 Bakery.com. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <a href="#contact" class="hover:text-bakery transition-colors">Privacy Policy</a>
+          <span class="text-white/30">|</span>
+          <a href="#contact" class="hover:text-bakery transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Over Shopping Cart Drawer -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 hidden" aria-hidden="true">
+    <div id="cart-backdrop" class="absolute inset-0 bg-espresso-deep/60 backdrop-blur-xs"></div>
+    <aside class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col">
+      <div class="px-6 py-5 border-b border-divider flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-bakery"></i>
+          <h3 class="font-heading font-bold text-lg text-ink">Your Bakery Cart</h3>
+        </div>
+        <button id="cart-close-btn" type="button" aria-label="Close Cart" class="w-9 h-9 rounded-full bg-cream text-ink hover:bg-bakery hover:text-white flex items-center justify-center transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+        <!-- Populated by script.js -->
+      </div>
+
+      <div class="p-6 border-t border-divider bg-cream/60">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-sm font-medium text-muted">Subtotal</span>
+          <span id="cart-subtotal" class="font-heading font-extrabold text-xl text-espresso">$0.00</span>
+        </div>
+        <button id="checkout-btn" type="button" class="w-full bg-bakery hover:bg-bakery-hover disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-sm py-3.5 rounded-full transition-colors flex items-center justify-center gap-2">
+          <span>Place Order</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+        <p id="checkout-confirmation" class="hidden mt-3 text-center text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl p-2.5">
+          Thank you! Your bakery order has been placed and is being freshly prepared.
+        </p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Watch Video Modal -->
+  <div id="video-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-espresso-deep/80 backdrop-blur-sm">
+    <div class="relative w-full max-w-3xl bg-espresso rounded-3xl overflow-hidden shadow-2xl border border-white/15">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <h3 class="font-heading font-bold text-white text-lg">Inside Bakery.com Kitchen</h3>
+        <button id="video-close-btn" type="button" aria-label="Close Video" class="w-9 h-9 rounded-full bg-white/10 hover:bg-bakery text-white flex items-center justify-center transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="aspect-video bg-black">
+        <iframe id="video-iframe" class="w-full h-full" src="" title="Artisan Baking Showcase" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery Lightbox Modal -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-espresso-deep/85 backdrop-blur-sm">
+    <div class="relative max-w-4xl w-full">
+      <button id="lightbox-close-btn" type="button" aria-label="Close Lightbox" class="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/15 hover:bg-bakery text-white flex items-center justify-center transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <img id="lightbox-image" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl bg-espresso" />
+      <p id="lightbox-caption" class="text-center text-white font-medium text-sm mt-3"></p>
+    </div>
+  </div>
+
+  <!-- Blog Article Preview Modal -->
+  <div id="blog-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-espresso-deep/75 backdrop-blur-sm">
+    <div class="relative w-full max-w-xl bg-white rounded-3xl overflow-hidden shadow-2xl">
+      <button id="blog-close-btn" type="button" aria-label="Close Article" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white/90 hover:bg-bakery hover:text-white text-ink flex items-center justify-center shadow transition-colors">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+      <img id="blog-modal-img" src="" alt="" class="w-full h-56 object-cover" />
+      <div class="p-6 sm:p-8">
+        <div class="inline-flex items-center gap-2 text-xs font-medium text-bakery mb-2">
+          <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+          <span id="blog-modal-date"></span>
+        </div>
+        <h3 id="blog-modal-title" class="font-heading font-extrabold text-2xl text-ink mb-4"></h3>
+        <div id="blog-modal-body" class="text-muted text-sm leading-relaxed space-y-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Cake Inquiry Modal -->
+  <div id="custom-order-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-espresso-deep/75 backdrop-blur-sm">
+    <div class="relative w-full max-w-lg bg-white rounded-3xl overflow-hidden shadow-2xl">
+      <div class="bg-espresso px-6 py-5 flex items-center justify-between">
+        <div>
+          <h3 class="font-heading font-bold text-lg text-white">Request a Custom Cake</h3>
+          <p class="text-xs text-cream/75">Tailored for birthdays, weddings &amp; special events</p>
+        </div>
+        <button id="custom-order-close-btn" type="button" aria-label="Close Custom Order Modal" class="w-9 h-9 rounded-full bg-white/10 hover:bg-bakery text-white flex items-center justify-center transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <form id="custom-order-form" class="p-6 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="custom-name" class="block text-xs font-semibold text-ink mb-1">Your Name</label>
+            <input id="custom-name" type="text" required placeholder="e.g. Sarah Johnson" class="w-full px-3.5 py-2.5 rounded-xl border border-divider text-sm focus:outline-none focus:border-bakery" />
+          </div>
+          <div>
+            <label for="custom-date" class="block text-xs font-semibold text-ink mb-1">Event Date</label>
+            <input id="custom-date" type="date" required class="w-full px-3.5 py-2.5 rounded-xl border border-divider text-sm focus:outline-none focus:border-bakery" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="custom-flavor" class="block text-xs font-semibold text-ink mb-1">Cake Flavor</label>
+            <select id="custom-flavor" class="w-full px-3.5 py-2.5 rounded-xl border border-divider text-sm bg-white focus:outline-none focus:border-bakery">
+              <option>Belgian Chocolate Drip</option>
+              <option>Classic Red Velvet</option>
+              <option>Vanilla Berry Cream</option>
+              <option>Salted Caramel Espresso</option>
+            </select>
+          </div>
+          <div>
+            <label for="custom-size" class="block text-xs font-semibold text-ink mb-1">Servings</label>
+            <select id="custom-size" class="w-full px-3.5 py-2.5 rounded-xl border border-divider text-sm bg-white focus:outline-none focus:border-bakery">
+              <option>8–12 Guests (6")</option>
+              <option>15–20 Guests (8")</option>
+              <option>30+ Guests (2-Tier)</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label for="custom-notes" class="block text-xs font-semibold text-ink mb-1">Design Notes</label>
+          <textarea id="custom-notes" rows="2" placeholder="Message on cake, colors, or dietary requests..." class="w-full px-3.5 py-2.5 rounded-xl border border-divider text-sm focus:outline-none focus:border-bakery"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-bakery hover:bg-bakery-hover text-white font-semibold text-sm py-3 rounded-full transition-colors flex items-center justify-center gap-2">
+          <span>Submit Custom Request</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top-btn" type="button" aria-label="Back to top" class="fixed bottom-6 left-6 z-40 hidden w-11 h-11 rounded-full bg-espresso hover:bg-bakery text-white shadow-lg items-center justify-center transition-all border border-white/15">
+    <i data-lucide="arrow-up" class="w-5 h-5"></i>
+  </button>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 translate-y-20 opacity-0 pointer-events-none transition-all duration-300 bg-espresso text-white px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 border border-white/10">
+    <span class="w-7 h-7 rounded-full bg-bakery flex items-center justify-center shrink-0">
+      <i data-lucide="check" class="w-4 h-4 text-white"></i>
+    </span>
+    <span id="toast-message" class="text-sm font-medium">Added to cart!</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

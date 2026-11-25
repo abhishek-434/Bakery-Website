@@ -1,0 +1,206 @@
+/* Custom styles for Bakery.com */
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF3EB;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D7C3B2;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #EA6A12;
+}
+
+/* Active Nav Link Indicator */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2.5px;
+  background-color: #EA6A12;
+  border-radius: 9999px;
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: #EA6A12;
+  font-weight: 600;
+}
+
+/* Hero Espresso Gradient Overlay */
+.hero-gradient {
+  background: linear-gradient(
+    90deg,
+    #2A1207 0%,
+    rgba(42, 18, 7, 0.88) 45%,
+    rgba(42, 18, 7, 0.25) 100%
+  );
+}
+
+/* Hero Bottom Asymmetric Wave */
+.hero-wave-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 20;
+  line-height: 0;
+  pointer-events: none;
+}
+
+/* Subtle Floating Animation for Doodles & Hero Cards */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.hero-doodles svg:nth-child(1) {
+  animation: floatSlow 7s ease-in-out infinite;
+}
+
+.hero-doodles svg:nth-child(2) {
+  animation: floatSlow 9s ease-in-out infinite 1.2s;
+}
+
+.hero-doodles svg:nth-child(3) {
+  animation: floatSlow 8s ease-in-out infinite 0.6s;
+}
+
+.float-card-1 {
+  animation: floatSlow 5.5s ease-in-out infinite;
+}
+
+.float-card-2 {
+  animation: floatReverse 6.5s ease-in-out infinite 0.8s;
+}
+
+/* Toast Active State */
+#toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Search Highlight Pulse */
+@keyframes highlightPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(234, 106, 18, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(234, 106, 18, 0.35);
+  }
+}
+
+.search-match {
+  animation: highlightPulse 1.2s ease-in-out 2;
+  border-color: #EA6A12 !important;
+}
+
+/* Hero Entrance Animation */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate > * {
+  opacity: 0;
+  animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-animate > *:nth-child(1) { animation-delay: 0.05s; }
+.hero-animate > *:nth-child(2) { animation-delay: 0.15s; }
+.hero-animate > *:nth-child(3) { animation-delay: 0.25s; }
+.hero-animate > *:nth-child(4) { animation-delay: 0.35s; }
+.hero-animate > *:nth-child(5) { animation-delay: 0.45s; }
+
+/* Scroll Reveal Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Continuous Bakery Marquee Ticker */
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 28s linear infinite;
+}
+
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Cart Badge Pop */
+@keyframes badgePop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.38); }
+  100% { transform: scale(1); }
+}
+
+.badge-pop {
+  animation: badgePop 0.35s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-doodles svg,
+  .float-card-1,
+  .float-card-2,
+  .marquee-track,
+  .hero-animate > * {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
