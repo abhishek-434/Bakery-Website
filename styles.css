@@ -1,5 +1,11 @@
 /* Custom styles for Bakery.com */
 
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
@@ -45,10 +51,21 @@
 .hero-gradient {
   background: linear-gradient(
     90deg,
-    #2A1207 0%,
-    rgba(42, 18, 7, 0.88) 45%,
-    rgba(42, 18, 7, 0.25) 100%
+    rgba(42, 18, 7, 0.94) 0%,
+    rgba(42, 18, 7, 0.86) 55%,
+    rgba(42, 18, 7, 0.58) 100%
   );
+}
+
+@media (min-width: 768px) {
+  .hero-gradient {
+    background: linear-gradient(
+      90deg,
+      #2A1207 0%,
+      rgba(42, 18, 7, 0.88) 45%,
+      rgba(42, 18, 7, 0.25) 100%
+    );
+  }
 }
 
 /* Hero Bottom Asymmetric Wave */
