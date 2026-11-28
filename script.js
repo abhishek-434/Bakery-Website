@@ -128,9 +128,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* =========================================
-     3. Shopping Cart & Toast Notification
+     3. Shopping Cart, Promo Code & Persistence
   ========================================= */
+  const CART_KEY = 'bakery_cart_v1';
+  const PROMO_KEY = 'bakery_promo_v1';
   let cart = [];
+  let appliedPromo = null;
+  let fulfillmentMode = 'delivery';
+
+  try {
+    const savedCart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+    if (Array.isArray(savedCart)) cart = savedCart;
+    const savedPromo = localStorage.getItem(PROMO_KEY);
+    if (savedPromo === 'SWEET20') appliedPromo = 'SWEET20';
+  } catch {
+    cart = [];
+  }
+
   const cartDrawer = document.getElementById('cart-drawer');
   const cartOpenBtn = document.getElementById('cart-open-btn');
   const cartCloseBtn = document.getElementById('cart-close-btn');
@@ -138,12 +152,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const cartBadge = document.getElementById('cart-badge');
   const cartItemsEl = document.getElementById('cart-items');
   const cartSubtotalEl = document.getElementById('cart-subtotal');
+  const cartDiscountRow = document.getElementById('cart-discount-row');
+  const cartDiscountAmount = document.getElementById('cart-discount-amount');
+  const promoForm = document.getElementById('promo-form');
+  const promoInput = document.getElementById('promo-input');
+  const promoFeedback = document.getElementById('promo-feedback');
+  const fulfillmentBtns = document.querySelectorAll('.fulfillment-btn');
   const checkoutBtn = document.getElementById('checkout-btn');
   const checkoutConfirmation = document.getElementById('checkout-confirmation');
 
   const toast = document.getElementById('toast');
   const toastMessage = document.getElementById('toast-message');
   let toastTimer = null;
+
+  function saveCart() {
+    try {
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      if (appliedPromo) {
+        localStorage.setItem(PROMO_KEY, appliedPromo);
+      } else {
+        localStorage.removeItem(PROMO_KEY);
+      }
+    } catch {
+      // Ignore storage quota errors
+    }
+  }
 
   function showToast(msg) {
     toastMessage.textContent = msg;
@@ -165,12 +198,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderCart() {
+    saveCart();
     const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    const discount = appliedPromo === 'SWEET20' ? subtotal * 0.2 : 0;
+    const finalTotal = Math.max(0, subtotal - discount);
 
     cartBadge.textContent = String(totalCount);
     cartBadge.classList.toggle('hidden', totalCount === 0);
-    cartSubtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+
+    if (discount > 0 && cart.length > 0) {
+      cartDiscountRow?.classList.remove('hidden');
+      if (cartDiscountAmount) cartDiscountAmount.textContent = `-$${discount.toFixed(2)}`;
+    } else {
+      cartDiscountRow?.classList.add('hidden');
+    }
+
+    cartSubtotalEl.textContent = `$${finalTotal.toFixed(2)}`;
     checkoutBtn.disabled = cart.length === 0;
 
     if (cart.length === 0) {
@@ -261,10 +305,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
   checkoutBtn?.addEventListener('click', () => {
     if (cart.length === 0) return;
+    const modeLabel = fulfillmentMode === 'pickup' ? 'ready for store pickup in 20 mins' : 'out for 30-min express delivery';
     cart = [];
+    appliedPromo = null;
+    if (promoInput) promoInput.value = '';
+    promoFeedback?.classList.add('hidden');
     renderCart();
+    checkoutConfirmation.textContent = `Thank you! Your bakery order has been placed and will be ${modeLabel}.`;
     checkoutConfirmation.classList.remove('hidden');
     showToast('Order placed! Fresh bakes on the way.');
+  });
+
+  promoForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const code = promoInput.value.trim().toUpperCase();
+    promoFeedback.classList.remove('hidden', 'text-emerald-700', 'text-red-600');
+    if (code === 'SWEET20') {
+      appliedPromo = 'SWEET20';
+      promoFeedback.textContent = 'SWEET20 applied! 20% off your order.';
+      promoFeedback.classList.add('text-emerald-700');
+      renderCart();
+      showToast('20% discount applied with SWEET20!');
+    } else {
+      appliedPromo = null;
+      promoFeedback.textContent = 'Invalid code. Try SWEET20 for 20% off.';
+      promoFeedback.classList.add('text-red-600');
+      renderCart();
+    }
+  });
+
+  fulfillmentBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      fulfillmentMode = btn.dataset.fulfillment;
+      fulfillmentBtns.forEach((b) => {
+        b.classList.remove('active', 'bg-espresso', 'text-white');
+        b.classList.add('text-muted');
+      });
+      btn.classList.add('active', 'bg-espresso', 'text-white');
+      btn.classList.remove('text-muted');
+    });
+  });
+
+  /* FAQ Accordion */
+  document.querySelectorAll('.faq-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.faq-item');
+      const content = item?.querySelector('.faq-content');
+      const icon = item?.querySelector('.faq-icon');
+      const isOpen = content && !content.classList.contains('hidden');
+
+      document.querySelectorAll('.faq-content').forEach((c) => c.classList.add('hidden'));
+      document.querySelectorAll('.faq-icon').forEach((i) => i.classList.remove('rotate-180'));
+
+      if (!isOpen && content) {
+        content.classList.remove('hidden');
+        icon?.classList.add('rotate-180');
+      }
+    });
   });
 
   cartOpenBtn?.addEventListener('click', openCart);
